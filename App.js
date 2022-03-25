@@ -1,38 +1,37 @@
 import React from "react";
-import { StyleSheet, Button, Text, View, SafeAreaView } from 'react-native';
+import { StyleSheet, Button, Text, View, SafeAreaView, ImageBackground } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import LoginScreen from "./screens/LoginScreen";
+import MainScreen from "./screens/MainScreen";
+
+
+
+
+const Stack = createNativeStackNavigator();
+
+
 
 export default function App() {
   return (
-    <SafeAreaView style ={styles.container}>
-       <Text style={styles.baseText}>
-      Renti
-      <Text style={styles.innerText}>Car</Text>
-    </Text>
-      <View>
-       <Button
-        title="Sign-in"
-      />
-       <Button
-        title="Sign-up"
-      />
-      </View>
-    </SafeAreaView>
+   
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="LoginScreen" component={LoginScreen} />
+        <Stack.Screen name="Home" component={MainScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  
   );
 }
+
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#dcd3b6',
     alignItems: 'center',   
-  },
-  baseText: {
-    fontSize: 60,
-    fontWeight: 'bold',
-  },
-  innerText: {
-    fontSize: 60,
-    color: 'red'
   }
 });
 
