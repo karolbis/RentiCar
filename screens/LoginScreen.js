@@ -1,12 +1,25 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React, {useState} from 'react'
-import {SafeAreaView, KeyboardAvoidingView, TextInput, TouchableOpacity } from 'react-native-web'
+import React, {useEffect, useState} from 'react'
+import {SafeAreaView, KeyboardAvoidingView, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import { auth } from '../firebase'
+import { useNavigation } from '@react-navigation/core'
+
 
 
 const LoginScreen = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
+const navigation = useNavigation()
+
+useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+        if (user) {
+    navigation.replace("Home")
+        }
+    })
+        return unsubscribe
+    }, [])
 
 
    const handleSignUp = () => {
@@ -35,13 +48,20 @@ const LoginScreen = () => {
             <Text style={styles.baseText}>
                 Renti
                 <Text style={styles.innerText}>Car</Text>
+            
+           
+    
+              
+              
             </Text>
 
         </SafeAreaView>
+        
         <KeyboardAvoidingView
             style={styles.container}
             behaviour="padding"
         >
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <View style={styles.inputContainer}>
                     <TextInput
                         placeholder="Email"
@@ -56,7 +76,7 @@ const LoginScreen = () => {
                         style={styles.input}
                         secureTextEntry={true} />
                 </View>
-
+                </TouchableWithoutFeedback>
 
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity
@@ -70,11 +90,12 @@ const LoginScreen = () => {
                         onPress={handleSignUp}
                         style={[styles.button, styles.buttonOutline]}
                     >
-                        <Text style={styles.buttonOutlineText}>Register</Text>
+                        <Text style={[styles.buttonOutlineText , styles.buttonText]}>Register</Text>
                     </TouchableOpacity>
 
                 </View>
-            </KeyboardAvoidingView></>
+            </KeyboardAvoidingView>
+            </>
   )
 }
 
@@ -86,12 +107,17 @@ container: {
     justifyContent: 'center',
     alignItems: 'center',
 },
-inputContainer: {
-
+carContainer: {
+width: "100%",
+height: "100%"
 },
+
 input: {
-
+    width: "100%",
+    padding: "12px",
+    borderColor: 'black'
 },
+
 baseText: {
     fontSize: 60,
     fontWeight: 'bold',
@@ -108,16 +134,26 @@ alignItems: 'center',
 marginTop: 40,
 },
 button: {
+    backgroundColor: 'red',
+    width: '20%',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+    borderRadius: 5,
+    paddingVertical: 10,
+    paddingHorizontal: 24,
+    marginTop: 10,
 
 },
 buttonText: {
-    backgroundColor: 'blue',
+    backgroundColor: 'black',
     width: '100%',
     justifyContent: 'space-between',
     flexDirection: 'row',
     borderRadius: 5,
     paddingVertical: 10,
     paddingHorizontal: 24,
+    color: 'white'
 },
 
 buttonOutline: {
