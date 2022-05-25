@@ -1,4 +1,4 @@
-import { auth } from './firebase'; // to jest sciezka do miejsca gdzie exportujesz obiekt auth z firebase 
+import { auth } from './firebase'; 
 class ApiFetcher {
   makeGetRequest(url, customHeaders) {
     return (
