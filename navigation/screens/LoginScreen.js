@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, {useEffect, useState} from 'react'
 import {SafeAreaView, KeyboardAvoidingView, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native'
-import { auth } from '../firebase'
+import { auth } from '../../firebase'
 import { useNavigation } from '@react-navigation/core'
 
 
@@ -15,7 +15,7 @@ const navigation = useNavigation()
 useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
         if (user) {
-    navigation.replace("Home")
+   navigation.navigate("Home")
         }
     })
         return unsubscribe
@@ -64,7 +64,7 @@ useEffect(() => {
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <View style={styles.inputContainer}>
                     <TextInput
-                        placeholder="Email"
+                        placeholder="E-mail"
                         value={email}
                         onChangeText={text => setEmail(text)}
                         style={styles.input} />
@@ -106,6 +106,7 @@ container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+
 },
 carContainer: {
 width: "100%",
@@ -114,8 +115,13 @@ height: "100%"
 
 input: {
     width: "100%",
-    padding: "12px",
-    borderColor: 'black'
+    padding: 8,
+    borderColor: 'black',
+    borderLeftWidth: 2,
+    borderTopWidth:2,
+    borderRightWidth: 2,
+    borderBottomWidth: 2,
+    
 },
 
 baseText: {
@@ -135,7 +141,7 @@ marginTop: 40,
 },
 button: {
     backgroundColor: 'red',
-    width: '20%',
+    width: '90%',
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
@@ -151,8 +157,8 @@ buttonText: {
     justifyContent: 'space-between',
     flexDirection: 'row',
     borderRadius: 5,
-    paddingVertical: 10,
-    paddingHorizontal: 24,
+    paddingVertical: 12,
+    paddingHorizontal: 40,
     color: 'white'
 },
 

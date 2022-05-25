@@ -1,29 +1,33 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Image,} from 'react-native'
 import React from 'react'
-import { TouchableOpacity } from 'react-native-web'
-import {auth} from '../firebase'
+import {auth} from '../../firebase'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/core'
+import LoginScreen from './LoginScreen'
+import { Ionicons } from 'react-native-vector-icons';
 
 
 
-const MainScreen = () => {
-  const navigation = useNavigation()
+const UserScreen = () => {
+  
 
   const handleSignOut = () => {
     auth
     .signOut()
-    .then(() => {
-    navigation.replace("LoginScreen")
-    //navigation.replace("Home")
-    })
+    
     .catch(error => alert(error.message))
   }
+  
 
   return (
     
-      
+    
     <SafeAreaView style = {styles.container}>
+    <View style={{ alignSelf: "center" }}>
+    <View style={styles.profileImg}>
+  <Image source={require('./../../assets/ProfPic.jpg')} style={styles.image} resizeMode="center" ></Image>
+      </View>
+      </View>
     <View style = {styles.buttonContainer}>
       <Text>User: {auth.currentUser?.email}</Text>
       <TouchableOpacity
@@ -41,7 +45,7 @@ const MainScreen = () => {
   )
 }
 
-export default MainScreen
+export default UserScreen
 
 const styles = StyleSheet.create({
   container: {
@@ -51,7 +55,7 @@ const styles = StyleSheet.create({
   },
   buttonSignOut :{
     backgroundColor: 'blue',
-    width: '30%',
+    width: '100%',
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
@@ -70,5 +74,25 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 40,
-    }
+    },
+    profileImg: {
+      width: 200,
+        height: 200,
+        borderRadius: 100,
+        marginTop: -200,
+        overflow: "hidden"
+    },
+    titleBar: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      marginHorizontal: 16
+    },
+    image: {
+      flex: 1,
+      height: undefined,
+      width: undefined,
+  },
 })
+
+
+
