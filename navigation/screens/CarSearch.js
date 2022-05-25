@@ -1,16 +1,50 @@
 import React, { useState, useEffect } from "react";
 import { View, Picker, StyleSheet, Text, Button, Alert, } from "react-native";
 import { Ionicons } from 'react-native-vector-icons';
-import { apiFetcher } from './../../ApiFetcher';
+import { ActivityIndicator, FlatList } from "react-native-web";
+import { ApiFetcher } from './../../ApiFetcher';
 
 
 
+
+
+  
 
 const CarSearch = () => {
+   const [isLoading, setLoading] = useState(true);
+   const [data, setData] = useState([]);
+
+useEffect(() => {
+    ApiFetcher
+      .makeRequest('https://carrental-api.azurewebsites.net/car/3') // url moze byc dynamiczny ofc
+      ?.then((dataFromServer) => {
+        console.log({ dataFromServer });
+      })
+			.catch(error => {
+				console.error(error);
+				// show toast or something
+				})
+  }, []);
+
+useEffect(() => {
+  ApiFetcher
+    .makeRequest('https://carrental-api.azurewebsites.net/car/3', {days: 1, pricing: 500}) // url moze byc dynamiczny ofc
+    .then((response) => {
+      if(response.ok) { 
+        setData(json.car)
+        }
+    })
+    .catch(error => {
+      console.error(error);
+      // show toast or something
+      })
+}, []);
+
   const [selectedValue, setSelectedValue] = useState("blank");
   const [selectedValue1, setSelectedValue1] = useState("blank");
   return (
     <View style={styles.container}>
+     
       
       <Picker
         selectedValue={selectedValue}
@@ -47,7 +81,12 @@ const CarSearch = () => {
         
         <Ionicons name = "search" size = {30} color = {"white"}/>
         
+
+
       </View>
+
+      
+
     </View>
     
   );
@@ -78,4 +117,15 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CarSearch
+export default CarSearch 
+
+
+/* Gdzies w apce FlatList by wyswietlic dane
+ {isLoading ? (
+      <ActivityIndicator/> 
+      ) : ( 
+      <FlatList
+      data={data}
+      
+      }
+      */

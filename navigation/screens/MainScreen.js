@@ -3,7 +3,7 @@ import React from 'react'
 import { Button, TouchableOpacity } from 'react-native'
 import {auth} from '../../firebase'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import BottomTab from '../BottomTab'
+import CarSearch from './CarSearch'
 
 
 
@@ -18,10 +18,16 @@ const MainScreen = ({navigation}) => {
   <View>
   <Text style = {styles.Title}>Find your</Text>
   <Text style = {styles.Title}>Dream car</Text>
+  <Text>Rent a car with our application, </Text>
+  <Text>it's easier than ever!</Text>
   
   </View>
     <View style = {styles.buttonSignOut}>
-      <Text>Get started</Text>
+    <Button
+        title="Find a Car"
+        color="white"
+        onPress={() => navigation.navigate('Car')}
+      />
     </View>
     </SafeAreaView>
    
@@ -37,18 +43,19 @@ const styles = StyleSheet.create({
     height: "100%",
     justifyContent: 'center',
   
-    backgroundColor:'white'
+    backgroundColor:'#F0FFF0'
   },
   buttonSignOut :{
-    backgroundColor: 'red',
+    backgroundColor: 'black',
     width: '70%',
+    height: '10%',
     marginHorizontal:55,
-    borderRadius: 5,
+    borderRadius: 20,
     paddingVertical: 10,
     paddingHorizontal: 24,
     marginTop: 40,
     marginBottom: 300,
-    
+  
     
     
   },
@@ -74,7 +81,7 @@ const styles = StyleSheet.create({
 ImgBackground: {
   
   width: '100%',
-  height: '100%',
+  height: '110%',
   overflow: 'hidden',
   borderBottomLeftRadius: 150,
   

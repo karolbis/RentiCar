@@ -47,7 +47,7 @@ const BottomTab = () => {
         })}
         tabBarOptions={{
           activeTintColor: 'red',
-          inactiveTintColor: 'gray',
+          inactiveTintColor: 'black',
           labelStyle: { paddingBottom: 10, fontSize: 10 },
           style: { padding: 10, height: 70}
         }}>

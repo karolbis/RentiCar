@@ -23,6 +23,7 @@ const UserScreen = () => {
     
     
     <SafeAreaView style = {styles.container}>
+       
     <View style={{ alignSelf: "center" }}>
     <View style={styles.profileImg}>
   <Image source={require('./../../assets/ProfPic.jpg')} style={styles.image} resizeMode="center" ></Image>
