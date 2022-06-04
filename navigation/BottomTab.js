@@ -9,13 +9,14 @@ import UserScreen from './screens/UserScreen';
 import MainScreen from './screens/MainScreen';
 import CarSearch from './screens/CarSearch';
 import LoginScreen from './screens/LoginScreen';
-
+import Reservations from './screens/Reservations';
 //Screen Names
-
+const Reservation = 'Reservations';
 const HomeName = 'Home';
 const SearchName = 'Car';
 const ProfileName = 'Profile';
 const LoginName = 'Login';
+
 
 const Tab = createBottomTabNavigator();
 
@@ -37,9 +38,15 @@ const BottomTab = () => {
 
             } else if (rn === ProfileName) {
               iconName = focused ? 'person' : 'person-outline';
+
+            } else if (rn === Reservation) {
+              iconName = focused ? 'earth' : 'earth-outline';
+            
             } else if (rn === LoginName) {
                 iconName = focused ? 'earth' : 'earth-outline';
-              }
+            }
+           
+              
 
             return <Ionicons name={iconName} size={size} color={color} />;
           },
@@ -55,6 +62,7 @@ const BottomTab = () => {
 <Tab.Screen name= {HomeName} component={MainScreen} />
 <Tab.Screen name= {SearchName} component={CarSearch} />
 <Tab.Screen name= {ProfileName} component={UserScreen} />
+<Tab.Screen name= {Reservation} component={Reservations} />
 <Tab.Screen name= {LoginName} component={LoginScreen} />
 
       </Tab.Navigator>
