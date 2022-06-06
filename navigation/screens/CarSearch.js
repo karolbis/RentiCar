@@ -10,11 +10,17 @@ import {
   Image,
   SafeAreaView,
   ScrollView,
+  TouchableHighlight,
+  navigation
 } from "react-native";
 import { Ionicons } from "react-native-vector-icons";
 import { apiFetcher } from "../../ApiFetcher";
+import { useNavigation } from "@react-navigation/native";
+
+
 
 const CarSearch = () => {
+  
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   console.log(data.length, { data });
@@ -61,22 +67,38 @@ const CarSearch = () => {
 
         <Ionicons name="search" size={30} color={"white"} />
       </View>
-      <ScrollView>
+      
+      <ScrollView style = {styles.postTitle}>
         {data.length > 0 &&
           data.map((item) => (
             <View key={item.carId}>
               {item.photos[0]?.fileUrl && (
+                
                 <Image
                   source={{ uri: item.photos[0].fileUrl }}
-                  style={{ width: 100, height: 100 }}
+                  style={{ width: 100, height: 100, borderRadius: 100 }}
+                  
                 />
+                
               )}
-
-              <Text>{item.manufacturer}</Text>
+              
+              <Text style = {styles.baseText}>{item.manufacturer}</Text>
+              <Text>Model: {item.model}</Text>
+              <Text>Pojemnosc silnika: {item.engine}</Text>
+              <Text>KM: {item.power}</Text>
+              <TouchableHighlight
+              onPress>
+              <Ionicons name = 'arrow-forward' size={30} color="red" />
+              </TouchableHighlight>
+              
             </View>
+    
           ))}
+          
       </ScrollView>
+      
     </View>
+    
   );
 };
 
@@ -101,6 +123,22 @@ const styles = StyleSheet.create({
   buttonSearchText: {
     color: "white",
     fontSize: 16,
+    
+  },
+  postView: {
+
+  },
+  postTitle : {
+   width: '80%',
+   display: 'flex',
+   marginTop: 20,
+  
+
+  },
+  baseText: {
+    fontSize: 20,
+    fontWeight: "bold",
+    
   },
 });
 

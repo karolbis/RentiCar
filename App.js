@@ -8,17 +8,20 @@ import MainScreen from "./navigation/screens/MainScreen";
 import UserScreen from "./navigation/screens/UserScreen";
 import BottomTab from "./navigation/BottomTab";
 import CarSearch from "./navigation/screens/CarSearch";
+import Pickedcar from "./navigation/screens/Pickedcar";
 
 
 
 
 const Stack = createNativeStackNavigator();
 
-
+<Stack.Navigator>
+      <Stack.Screen name="Pickedcar" component={Pickedcar} />
+</Stack.Navigator>
 
 export default function App() {
   return (
-   
+    
     <BottomTab/>
   
   );
